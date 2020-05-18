@@ -24,6 +24,7 @@ namespace Homework_08
         ICommand sortByAge;
         ICommand sortBySalary;
         ICommand addWorker;
+        ICommand addDepartment;
 
         #endregion
 
@@ -187,6 +188,20 @@ namespace Homework_08
         }
 
         /// <summary>
+        /// Добавить новый департамент
+        /// </summary>
+        public ICommand AddDepartment
+        {
+            get 
+            {
+                return addDepartment ?? (addDepartment = new RelayCommand((obj) =>
+                {
+
+                }));
+            } 
+        }
+
+        /// <summary>
         /// Номер вкладки
         /// </summary>
         public int Selected
@@ -200,7 +215,7 @@ namespace Homework_08
                 selected = value;                
                 OnPropertyChanged("Selected");
             }
-        }        
+        }
 
         #endregion
 

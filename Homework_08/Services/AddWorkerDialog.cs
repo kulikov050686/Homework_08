@@ -12,7 +12,7 @@ namespace Homework_08.Services
         /// <summary>
         /// Диалоговое окно для добавления сотрудника
         /// </summary>
-        /// <param name="departament"> Название департамента </param>        
+        /// <param name="departament"> Название департамента </param>
         public static Worker Show(string departament)
         {
             WindowAddWorker addWorker = new WindowAddWorker();

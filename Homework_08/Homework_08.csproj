@@ -64,8 +64,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Services\AddDepartamentDialog.cs" />
     <Compile Include="Services\AddWorkerDialog.cs" />
+    <Compile Include="ViewModels\AddDepartamentViewModel.cs" />
     <Compile Include="ViewModels\AddWorkerViewModel.cs" />
+    <Compile Include="Views\WindowAddDepartament.xaml.cs">
+      <DependentUpon>WindowAddDepartament.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WindowAddWorker.xaml.cs">
       <DependentUpon>WindowAddWorker.xaml</DependentUpon>
     </Compile>
@@ -89,6 +94,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\WindowAddDepartament.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\WindowAddWorker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
