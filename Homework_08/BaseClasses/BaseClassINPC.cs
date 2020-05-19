@@ -55,6 +55,6 @@ namespace Homework_08.BaseClasses
         /// <summary>
         /// Метод для вызова события извещения об изменении всех свойств
         /// </summary>
-        public void OnAllPropertyChanged() => OnPropertyChanged(GetType().GetProperties());
+        public void OnAllPropertyChanged() => OnPropertyChanged(GetType().GetProperties());        
     }
 }

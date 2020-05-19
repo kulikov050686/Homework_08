@@ -2,7 +2,7 @@
 using System;
 using Microsoft.Win32;
 using System.IO;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Homework_08.Services
 {
@@ -19,7 +19,7 @@ namespace Homework_08.Services
         /// <summary>
         /// Открывает диалоговое окно для сохранения в файл
         /// </summary>
-        public static void SaveFileDialog(List<Department> listSave)
+        public static void SaveFileDialog(ObservableCollection<Department> listSave)
         {
             SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog();
 
@@ -46,7 +46,7 @@ namespace Homework_08.Services
         /// <summary>
         /// Открывает диалоговое окно для чтения из файла
         /// </summary>        
-        public static List<Department> OpenFileDialog()
+        public static ObservableCollection<Department> OpenFileDialog()
         {
             OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();            
 

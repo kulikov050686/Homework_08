@@ -9,7 +9,7 @@ namespace Homework_08.ViewModels
     /// <summary>
     /// Модель представление окна добавление департамента
     /// </summary>
-    public class AddDepartamentViewModel
+    public class AddDepartmentViewModel
     {
         #region Закрытые поля
 
@@ -79,7 +79,7 @@ namespace Homework_08.ViewModels
         /// <summary>
         /// Конструктор
         /// </summary>
-        public AddDepartamentViewModel()
+        public AddDepartmentViewModel()
         {
             Department = null;
         }

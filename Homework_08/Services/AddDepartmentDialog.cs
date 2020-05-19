@@ -7,20 +7,20 @@ namespace Homework_08.Services
     /// <summary>
     /// Открытие диалогового окна добавить департамент
     /// </summary>
-    public static class AddDepartamentDialog
+    public static class AddDepartmentDialog
     {
         /// <summary>
         /// Диалоговое окно для добавления департамента
         /// </summary>
         public static Department Show()
         {
-            WindowAddDepartament addDepartament = new WindowAddDepartament();
-            AddDepartamentViewModel addDepartamentViewModel = new AddDepartamentViewModel();
+            WindowAddDepartament addDepartment = new WindowAddDepartament();
+            AddDepartmentViewModel addDepartamentViewModel = new AddDepartmentViewModel();
 
             addDepartamentViewModel.Title = "Добавить депортамент";
-            addDepartament.DataContext = addDepartamentViewModel;
+            addDepartment.DataContext = addDepartamentViewModel;
 
-            addDepartament.ShowDialog();
+            addDepartment.ShowDialog();
 
             return addDepartamentViewModel.Department;
         }

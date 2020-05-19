@@ -1,6 +1,6 @@
 ﻿using Homework_08.Models;
 using Newtonsoft.Json;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -16,7 +16,7 @@ namespace Homework_08.Services
         /// </summary>
         /// <param name="PathFile"> Путь к файлу </param>
         /// <param name="listSave"> Сохраняемый лист </param>
-        public static void SaveAsJSON(string PathFile, List<Department> listSave)
+        public static void SaveAsJSON(string PathFile, ObservableCollection<Department> listSave)
         {
             using (StreamWriter writer = File.CreateText(PathFile))
             {
@@ -29,20 +29,20 @@ namespace Homework_08.Services
         /// Загрузить данные в лист из файла формата JSON
         /// </summary>
         /// <param name="PathFile"> Путь к файлу </param>        
-        public static List<Department> OpenAsJSON(string PathFile)
+        public static ObservableCollection<Department> OpenAsJSON(string PathFile)
         {
             var fileExists = File.Exists(PathFile);
 
             if (!fileExists)
             {
                 File.CreateText(PathFile).Dispose();
-                return new List<Department>();
+                return new ObservableCollection<Department>();
             }
 
             using (var reader = File.OpenText(PathFile))
             {
                 var fileTaxt = reader.ReadToEnd();
-                return JsonConvert.DeserializeObject<List<Department>>(fileTaxt);
+                return JsonConvert.DeserializeObject<ObservableCollection<Department>>(fileTaxt);
             }            
         }
 
@@ -51,9 +51,9 @@ namespace Homework_08.Services
         /// </summary>
         /// <param name="PathFile"> Путь к файлу </param>
         /// <param name="listSave"> Сохраняемый лист </param>
-        public static void SaveAsXML(string PathFile, List<Department> listSave)
+        public static void SaveAsXML(string PathFile, ObservableCollection<Department> listSave)
         {
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Department>));
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ObservableCollection<Department>));
 
             using (Stream fStream = new FileStream(PathFile, FileMode.Create, FileAccess.Write))
             {
@@ -65,22 +65,22 @@ namespace Homework_08.Services
         /// Загрузить данные в лист из файла формата XML
         /// </summary>
         /// <param name="PathFile"> Путь к файлу </param>        
-        public static List<Department> OpenAsXML(string PathFile)
+        public static ObservableCollection<Department> OpenAsXML(string PathFile)
         {
             var fileExists = File.Exists(PathFile);
 
             if (!fileExists)
             {
                 File.CreateText(PathFile).Dispose();
-                return new List<Department>();
+                return new ObservableCollection<Department>();
             }
 
-            List<Department> Temp = new List<Department>();
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Department>));
+            ObservableCollection<Department> Temp = new ObservableCollection<Department>();
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ObservableCollection<Department>));
 
             using (Stream fStream = new FileStream(PathFile, FileMode.Open, FileAccess.Read))
             {
-                Temp = xmlSerializer.Deserialize(fStream) as List<Department>;
+                Temp = xmlSerializer.Deserialize(fStream) as ObservableCollection<Department>;
             }
 
             return Temp;

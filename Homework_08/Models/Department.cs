@@ -1,24 +1,23 @@
 ﻿using Homework_08.BaseClasses;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Homework_08.Models
 {
     /// <summary>
     /// Департамент
     /// </summary>
-    [Serializable]
     public class Department : BaseClassINPC
     {
         string date;
         string nameDepartment;
-        List<Worker> workers;
+        ObservableCollection<Worker> workers;
         int amountOfWorkers;
 
         /// <summary>
         /// Дата создания депортамента
         /// </summary>
-        public string Date 
+        public string Date
         {
             get 
             { 
@@ -79,13 +78,13 @@ namespace Homework_08.Models
         /// <summary>
         /// Работники департамента
         /// </summary>
-        public List<Worker> Workers
+        public ObservableCollection<Worker> Workers
         { 
             get
             {
                 if (workers == null)
                 {
-                    workers = new List<Worker>();
+                    workers = new ObservableCollection<Worker>();
                 }
 
                 return workers;
@@ -94,7 +93,7 @@ namespace Homework_08.Models
             {
                 if(workers == null)
                 {
-                    workers = new List<Worker>();
+                    workers = new ObservableCollection<Worker>();
                 }
 
                 workers = value;
@@ -114,7 +113,7 @@ namespace Homework_08.Models
         /// </summary>
         /// <param name="nameDepartment"> Название департамента </param>
         /// <param name="workers"> Список работников департамента </param>
-        public Department(string nameDepartment, List<Worker> workers = null)
+        public Department(string nameDepartment, ObservableCollection<Worker> workers = null)
         {
             if (string.IsNullOrWhiteSpace(nameDepartment))
             {

@@ -1,7 +1,7 @@
 ﻿using Homework_08.BaseClasses;
 using Homework_08.Models;
 using Homework_08.Services;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -15,7 +15,7 @@ namespace Homework_08
         #region Закрытые поля
 
         int selected;
-        List<Department> companyDepartments;       
+        ObservableCollection<Department> companyDepartments;       
 
         ICommand saveFile;
         ICommand openFile;
@@ -38,13 +38,13 @@ namespace Homework_08
         /// <summary>
         /// Список всех департаментов компании
         /// </summary>
-        public List<Department> CompanyDepartments
+        public ObservableCollection<Department> CompanyDepartments
         {
             get
             {
                 if(companyDepartments == null)
                 {
-                    companyDepartments = new List<Department>();
+                    companyDepartments = new ObservableCollection<Department>();
                 }
 
                 return companyDepartments;
@@ -53,11 +53,11 @@ namespace Homework_08
             {
                 if (companyDepartments == null)
                 {
-                    companyDepartments = new List<Department>();
+                    companyDepartments = new ObservableCollection<Department>();
                 }
 
                 companyDepartments = value;
-                OnPropertyChanged("CompanyDepartments");
+                OnPropertyChanged("CompanyDepartments");                
             }
         }        
 
@@ -196,7 +196,12 @@ namespace Homework_08
             {
                 return addDepartment ?? (addDepartment = new RelayCommand((obj) =>
                 {
+                    Department TempDepartment = AddDepartmentDialog.Show();
 
+                    if(TempDepartment != null)
+                    {
+                        CompanyDepartments.Add(TempDepartment);
+                    }
                 }));
             } 
         }
@@ -226,21 +231,21 @@ namespace Homework_08
         {
             Title = "Приложение";
 
-            List<Worker> list1 = new List<Worker>
+            ObservableCollection<Worker> list1 = new ObservableCollection<Worker>
             {
                 new Worker(26, "Виталий", "Смолинов", 24, "Депортамент 1", "Охранник", 20000),
                 new Worker(29, "Семён", "Лопатин", 37, "Депортамент 1", "Программист", 39000),
                 new Worker(15, "Михаил", "Липов", 28, "Депортамент 1", "Уборщик", 17000)
             };
 
-            List<Worker> list2 = new List<Worker>
+            ObservableCollection<Worker> list2 = new ObservableCollection<Worker>
             {
                 new Worker(23, "Олег", "Синицин", 45, "Депортамент 2", "Программист", 45000),
                 new Worker(27, "Павел", "Муромский", 31, "Депортамент 2", "Программист", 37000),
                 new Worker(17, "Леонид", "Алексеев", 35, "Депортамент 2", "Охранник", 15000)
             };
 
-            List<Worker> list3 = new List<Worker>
+            ObservableCollection<Worker> list3 = new ObservableCollection<Worker>
             {
                 new Worker(24, "Александр", "Лидин", 25, "Депортамент 3", "Помощник программиста", 31000),
                 new Worker(14, "Леонид", "Стариков", 24, "Депортамент 3", "Помощник программиста", 21000),
@@ -248,12 +253,12 @@ namespace Homework_08
             };
 
 
-            CompanyDepartments = new List<Department>
+            CompanyDepartments = new ObservableCollection<Department>
             {
                 new Department("Депортамент 1", list1),
                 new Department("Депортамент 2", list2),
                 new Department("Депортамент 3", list3)
-            };
-        }
+            };            
+        }        
     }
 }

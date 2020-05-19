@@ -5,7 +5,8 @@ namespace Homework_08.Models
     /// <summary>
     /// Работник
     /// </summary>
-    [Serializable]
+    ///[Serializable]
+    ///
     public class Worker
     {
         /// <summary>

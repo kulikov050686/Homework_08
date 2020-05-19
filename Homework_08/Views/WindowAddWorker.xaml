@@ -8,7 +8,10 @@
         mc:Ignorable="d"
         Title="{Binding Title}" 
         Height="380" 
-        Width="300">
+        Width="300" 
+        ResizeMode="NoResize" 
+        Topmost="True"        
+        WindowStartupLocation="CenterScreen">
 
     <StackPanel Margin="5 5 5 5">
 

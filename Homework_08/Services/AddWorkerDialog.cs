@@ -13,10 +13,10 @@ namespace Homework_08.Services
         /// Диалоговое окно для добавления сотрудника
         /// </summary>
         /// <param name="departament"> Название департамента </param>
-        public static Worker Show(string departament)
+        public static Worker Show(string department)
         {
             WindowAddWorker addWorker = new WindowAddWorker();
-            AddWorkerViewModel addWorkerViewModel = new AddWorkerViewModel(departament);
+            AddWorkerViewModel addWorkerViewModel = new AddWorkerViewModel(department);
 
             addWorkerViewModel.Title = "Добавить работника";
             addWorker.DataContext = addWorkerViewModel;
