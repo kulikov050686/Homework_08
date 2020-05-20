@@ -15,6 +15,7 @@ namespace Homework_08.ViewModels
 
         Department department;
         string nameDepartament;
+        string addText;
 
         ICommand add;
         ICommand cancel;
@@ -73,6 +74,11 @@ namespace Homework_08.ViewModels
         /// Название департамента
         /// </summary>
         public string NameDepartament { get => nameDepartament; set => nameDepartament = value; }
+
+        /// <summary>
+        /// Надпись на кнопке добавить
+        /// </summary>
+        public string AddText { get => addText; set => addText = value; }
 
         #endregion
 

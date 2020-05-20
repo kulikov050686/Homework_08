@@ -18,6 +18,7 @@ namespace Homework_08.Services
             AddDepartmentViewModel addDepartamentViewModel = new AddDepartmentViewModel();
 
             addDepartamentViewModel.Title = "Добавить депортамент";
+            addDepartamentViewModel.AddText = "Добавить";
             addDepartment.DataContext = addDepartamentViewModel;
 
             addDepartment.ShowDialog();

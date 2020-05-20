@@ -46,10 +46,10 @@
         </Menu>
 
         <!-- Список записей -->
-        <TabControl ItemsSource="{Binding CompanyDepartments}" SelectedIndex="{Binding Selected}">
+        <TabControl ItemsSource="{Binding CompanyDepartments}" SelectedIndex="{Binding Selected}" Height="370" Margin="10 0 10 0">
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    <ListView ItemsSource="{Binding Workers}">
+                    <ListView ItemsSource="{Binding Workers}" SelectedIndex="{Binding SelectedWorker}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="№" DisplayMemberBinding="{Binding Id}"/>
@@ -59,10 +59,22 @@
                                 <GridViewColumn Header="Должность" DisplayMemberBinding="{Binding EmployeePosition}"/>
                                 <GridViewColumn Header="Зарплата" DisplayMemberBinding="{Binding Salary}"/>                                
                             </GridView>
-                        </ListView.View>
+                        </ListView.View>                        
                     </ListView>
                 </DataTemplate>               
-            </TabControl.ContentTemplate>                
+            </TabControl.ContentTemplate>
+
+            <TabControl.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Добавить департамент" Command="{Binding AddDepartment}"/>
+                    <MenuItem Header="Добавить работника" Command="{Binding AddWorker}"/>
+                    <MenuItem Header="Редактировать департамент" Command="{Binding EditDepartment}"/>
+                    <MenuItem Header="Редактировать работника" Command="{Binding EditWorker}"/>
+                    <MenuItem Header="Удалить работника" Command="{Binding DeleteWorker}"/>
+                    <MenuItem Header="Удалить департамент" Command="{Binding DeleteDepartment}"/>
+                </ContextMenu>
+            </TabControl.ContextMenu>
+            
         </TabControl>
 
     </StackPanel>

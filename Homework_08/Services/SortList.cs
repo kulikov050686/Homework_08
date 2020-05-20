@@ -10,17 +10,15 @@ namespace Homework_08.Services
     /// Сортировка
     /// </summary>
     public static class SortList<T>
-    {
-        static ObservableCollection<Worker> TempList;
-
+    {        
         /// <summary>
-        /// Сортировка листа
+        /// Сортировка листа работников
         /// </summary>
         /// <param name="list"> Сортируемый лист </param>
         /// <param name="key"> Критерий сортировки </param>
-        static public void Sort(ObservableCollection<Worker> list, Func<Worker, T> key)
+        static public void SortWorker(ObservableCollection<Worker> list, Func<Worker, T> key)
         {
-            TempList = new ObservableCollection<Worker>();
+            ObservableCollection<Worker> TempList = new ObservableCollection<Worker>();
             IEnumerable<Worker> e = list.OrderBy(key);
 
             TempList.Clear();
@@ -32,6 +30,30 @@ namespace Homework_08.Services
             }
 
             foreach (Worker my in TempList)
+            {
+                list.Add(my);
+            }
+        }
+
+        /// <summary>
+        /// Сортировка листа департаментов
+        /// </summary>
+        /// <param name="list"> Сортируемый лист </param>
+        /// <param name="key"> Критерий сортировки </param>
+        static public void SortDepartment(ObservableCollection<Department> list, Func<Department, T> key)
+        {
+            ObservableCollection<Department> TempList = new ObservableCollection<Department>();
+            IEnumerable<Department> e = list.OrderBy(key);
+
+            TempList.Clear();
+
+            foreach (Department my in e)
+            {
+                TempList.Add(my);
+                list.Remove(my);
+            }
+
+            foreach (Department my in TempList)
             {
                 list.Add(my);
             }
