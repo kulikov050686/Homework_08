@@ -22,6 +22,7 @@ namespace Homework_08.ViewModels
         string employeePositionWorker;
         string salaryWorker;
         string department;
+        string addText;
 
         int id;
         int age;
@@ -114,6 +115,11 @@ namespace Homework_08.ViewModels
         /// Работник
         /// </summary>
         public Worker Worker { get => worker; private set => worker = value; }
+
+        /// <summary>
+        /// Надпись на кнопке добавить
+        /// </summary>
+        public string AddText { get => addText; set => addText = value; }
 
         #endregion
 

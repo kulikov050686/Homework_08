@@ -69,6 +69,7 @@
     <Compile Include="Services\AddDepartmentDialog.cs" />
     <Compile Include="Services\AddWorkerDialog.cs" />
     <Compile Include="Services\EditDepartmentDialog.cs" />
+    <Compile Include="Services\EditWorkerDialog.cs" />
     <Compile Include="ViewModels\AddDepartmentViewModel.cs" />
     <Compile Include="ViewModels\AddWorkerViewModel.cs" />
     <Compile Include="Views\WindowAddDepartment.xaml.cs">

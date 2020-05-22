@@ -19,6 +19,7 @@ namespace Homework_08.Services
             AddWorkerViewModel addWorkerViewModel = new AddWorkerViewModel(department);
 
             addWorkerViewModel.Title = "Добавить работника";
+            addWorkerViewModel.AddText = "Добавить";
             addWorker.DataContext = addWorkerViewModel;
 
             addWorker.ShowDialog();

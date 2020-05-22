@@ -11,7 +11,7 @@
         ResizeMode="NoResize">
 
     <Window.DataContext>
-        <local:MainViewModel/>
+        <local:MainViewModel/>        
     </Window.DataContext>
 
     <StackPanel>
@@ -61,7 +61,7 @@
         <TabControl ItemsSource="{Binding CompanyDepartments}" SelectedIndex="{Binding SelectedDepartment}" Height="370" Margin="10 0 10 0">
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    <ListView ItemsSource="{Binding Workers}" SelectedIndex="{Binding SelectedWorker}">
+                    <ListView ItemsSource="{Binding Workers}" SelectedIndex="{Binding RelativeSource= {RelativeSource AncestorType=Window, Mode=FindAncestor}, Path=DataContext.SelectedWorker}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="№" DisplayMemberBinding="{Binding Id}"/>

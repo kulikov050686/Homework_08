@@ -265,7 +265,6 @@ namespace Homework_08
                     {
                         CompanyDepartments[SelectedDepartment] = EditDepartmentDialog.Show(CompanyDepartments[SelectedDepartment]);                        
                     }
-
                 }, (obj) => CompanyDepartments.Count != 0)); 
             }
         }
@@ -279,8 +278,12 @@ namespace Homework_08
             {
                 return editWorker ?? (editWorker = new RelayCommand((obj) => 
                 {
-                    MessageBox.Show("Пока не работает!");
-                }, (obj) => CompanyDepartments.Count != 0)); 
+                    if (MessageBox.Show("Редактировать данные работника?", "Внимание!!!", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        CompanyDepartments[SelectedDepartment].Workers[SelectedWorker] = EditWorkerDialog.Show(CompanyDepartments[SelectedDepartment].Workers[SelectedWorker]);
+                    }
+
+                }, (obj) => CompanyDepartments.Count != 0 && SelectedWorker > -1)); 
             } 
         }
 
@@ -293,9 +296,11 @@ namespace Homework_08
             {
                 return deleteWorker ?? (deleteWorker = new RelayCommand((obj) => 
                 {
-                    //MessageBox.Show("Пока не работает!");
-                    MessageBox.Show(Convert.ToString(SelectedDepartment) + " " + Convert.ToString(SelectedWorker));
-                }, (obj) => CompanyDepartments.Count != 0)); 
+                    if (MessageBox.Show("Удалить работника?", "Внимание!!!", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        CompanyDepartments[SelectedDepartment].Workers.RemoveAt(SelectedWorker);
+                    }
+                }, (obj) => CompanyDepartments.Count != 0 && SelectedWorker > -1)); 
             } 
         }
 
@@ -355,14 +360,7 @@ namespace Homework_08
         /// </summary>
         public MainViewModel()
         {
-            Title = "Приложение";
-
-            CompanyDepartments.CollectionChanged += CompanyDepartments_CollectionChanged;
+            Title = "Приложение";            
         }
-
-        private void CompanyDepartments_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            
-        }        
     }
 }

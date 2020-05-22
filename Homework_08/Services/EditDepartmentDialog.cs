@@ -4,6 +4,9 @@ using Homework_08.Views;
 
 namespace Homework_08.Services
 {
+    /// <summary>
+    /// Открытие диалогового окна для редактирования департамента
+    /// </summary>
     public static class EditDepartmentDialog
     {
         /// <summary>
