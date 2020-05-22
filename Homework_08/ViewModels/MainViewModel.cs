@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Collections.Specialized;
+using System;
 
 namespace Homework_08
 {
@@ -15,7 +16,7 @@ namespace Homework_08
     {
         #region Закрытые поля
 
-        int selected;
+        int selectedDepartment;
         int selectedWorker;
         ObservableCollection<Department> companyDepartments;       
 
@@ -25,6 +26,7 @@ namespace Homework_08
         ICommand sortById;
         ICommand sortByAge;
         ICommand sortBySalary;
+        ICommand sortByAgeAndSalary;
         ICommand sortDepartmentByName;
         ICommand sortDepartmentByAmountOfWorkers;
         ICommand addWorker;
@@ -125,9 +127,9 @@ namespace Homework_08
             {
                 return sortById ?? (sortById = new RelayCommand((obj) =>
                 {
-                    if (CompanyDepartments[Selected].Workers != null)
+                    if (CompanyDepartments[SelectedDepartment].Workers != null)
                     {
-                        SortList<int>.SortWorker(CompanyDepartments[Selected].Workers, key => key.Id);
+                        SortList<int>.SortWorker(CompanyDepartments[SelectedDepartment].Workers, key => key.Id);
                     }
                 }, (obj) => CompanyDepartments.Count != 0)); 
             } 
@@ -142,9 +144,9 @@ namespace Homework_08
             {
                 return sortByAge ?? (sortByAge = new RelayCommand((obj) => 
                 {
-                    if (CompanyDepartments[Selected].Workers != null)
+                    if (CompanyDepartments[SelectedDepartment].Workers != null)
                     {
-                        SortList<int>.SortWorker(CompanyDepartments[Selected].Workers, key => key.Age);
+                        SortList<int>.SortWorker(CompanyDepartments[SelectedDepartment].Workers, key => key.Age);
                     }                    
                 }, (obj) => CompanyDepartments.Count != 0)); 
             } 
@@ -159,9 +161,26 @@ namespace Homework_08
             {
                 return sortBySalary ?? (sortBySalary = new RelayCommand((obj) => 
                 {
-                    if (CompanyDepartments[Selected].Workers != null)
+                    if (CompanyDepartments[SelectedDepartment].Workers != null)
                     {
-                        SortList<int>.SortWorker(CompanyDepartments[Selected].Workers, key => key.Salary);
+                        SortList<int>.SortWorker(CompanyDepartments[SelectedDepartment].Workers, key => key.Salary);
+                    }
+                }, (obj) => CompanyDepartments.Count != 0));
+            } 
+        }
+
+        /// <summary>
+        /// Сортировка по возрасту и зарплате
+        /// </summary>
+        public ICommand SortByAgeAndSalary
+        { 
+            get 
+            {
+                return sortByAgeAndSalary ?? (sortByAgeAndSalary = new RelayCommand((obj) =>
+                {
+                    if (CompanyDepartments[SelectedDepartment].Workers != null)
+                    {
+                        SortList<int>.SortWorker(CompanyDepartments[SelectedDepartment].Workers, key1 => key1.Age, key2 => key2.Salary);
                     }
                 }, (obj) => CompanyDepartments.Count != 0));
             } 
@@ -176,11 +195,11 @@ namespace Homework_08
             {
                 return addWorker ?? (addWorker = new RelayCommand((obj) => 
                 {
-                    Worker TempWorker = AddWorkerDialog.Show(companyDepartments[Selected].NameDepartment);
+                    Worker TempWorker = AddWorkerDialog.Show(companyDepartments[SelectedDepartment].NameDepartment);
 
                     if (TempWorker != null)
                     {
-                        companyDepartments[Selected].Workers.Add(TempWorker);
+                        companyDepartments[SelectedDepartment].Workers.Add(TempWorker);
                     }                                        
                 }, (obj) => CompanyDepartments.Count != 0));
             } 
@@ -220,7 +239,7 @@ namespace Homework_08
         }
 
         /// <summary>
-        /// Сортировка листа департаментов по количеству сотрудников в нём
+        /// Сортировка листа департаментов по количеству в нём сотрудников 
         /// </summary>
         public ICommand SortDepartmentByAmountOfWorkers
         {
@@ -244,7 +263,7 @@ namespace Homework_08
                 {
                     if (MessageBox.Show("Редактировать текущий департамент?", "Внимание!!!", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        CompanyDepartments[Selected] = EditDepartmentDialog.Show(CompanyDepartments[Selected]);                        
+                        CompanyDepartments[SelectedDepartment] = EditDepartmentDialog.Show(CompanyDepartments[SelectedDepartment]);                        
                     }
 
                 }, (obj) => CompanyDepartments.Count != 0)); 
@@ -274,7 +293,8 @@ namespace Homework_08
             {
                 return deleteWorker ?? (deleteWorker = new RelayCommand((obj) => 
                 {
-                    MessageBox.Show("Пока не работает!");
+                    //MessageBox.Show("Пока не работает!");
+                    MessageBox.Show(Convert.ToString(SelectedDepartment) + " " + Convert.ToString(SelectedWorker));
                 }, (obj) => CompanyDepartments.Count != 0)); 
             } 
         }
@@ -290,7 +310,7 @@ namespace Homework_08
                 {
                     if(MessageBox.Show("Удалить текущий департамент?", "Внимание!!!", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        CompanyDepartments.RemoveAt(Selected);
+                        CompanyDepartments.RemoveAt(SelectedDepartment);
                     }
                 }, (obj) => CompanyDepartments.Count != 0)); 
             }
@@ -299,16 +319,16 @@ namespace Homework_08
         /// <summary>
         /// Номер вкладки
         /// </summary>
-        public int Selected
+        public int SelectedDepartment
         {
             get 
             { 
-                return selected; 
+                return selectedDepartment; 
             }
             set
             {
-                selected = value;                
-                OnPropertyChanged("Selected");
+                selectedDepartment = value;                
+                OnPropertyChanged("SelectedDepartment");
             }
         }
 
@@ -326,7 +346,7 @@ namespace Homework_08
                 selectedWorker = value;
                 OnPropertyChanged("SelectedWorker");
             }
-        }       
+        }
 
         #endregion
 
@@ -340,17 +360,9 @@ namespace Homework_08
             CompanyDepartments.CollectionChanged += CompanyDepartments_CollectionChanged;
         }
 
-        /// <summary>
-        /// Событие вызываемое при изменении коллекции департаментов
-        /// </summary>        
         private void CompanyDepartments_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Replace:
-                    MessageBox.Show("Изменение коллекции!!!");                    
-                    break;
-            }            
-        }
+            
+        }        
     }
 }

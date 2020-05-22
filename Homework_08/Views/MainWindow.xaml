@@ -30,13 +30,25 @@
             </MenuItem>
 
             <MenuItem Header="Сортировать">
-                <MenuItem Header="Id" Command="{Binding SortById}"/>
-                <Separator/>
-                <MenuItem Header="Возраст" Command="{Binding SortByAge}"/>
-                <Separator/>
-                <MenuItem Header="Зарплата" Command="{Binding SortBySalary}"/>
-            </MenuItem>
+                <MenuItem Header="Сотрудников по">
+                    <MenuItem Header="Id" Command="{Binding SortById}"/>
+                    <Separator/>
+                    <MenuItem Header="Возрасту" Command="{Binding SortByAge}"/>
+                    <Separator/>
+                    <MenuItem Header="Зарплате" Command="{Binding SortBySalary}"/>
+                    <Separator/>
+                    <MenuItem Header="Возрасту и зарплате" Command="{Binding SortByAgeAndSalary}"/>
+                </MenuItem>
 
+                <Separator/>
+
+                <MenuItem Header="Депортаменты по">
+                    <MenuItem Header="Названию" Command="{Binding SortDepartmentByName}"/>
+                    <Separator/>
+                    <MenuItem Header="Количеству сотрудников" Command="{Binding SortDepartmentByAmountOfWorkers}"/>                    
+                </MenuItem>
+            </MenuItem>
+            
             <MenuItem Header="Добавить">
                 <MenuItem Header="Нового работника" Command="{Binding AddWorker}"/>
                 <Separator/>
@@ -46,7 +58,7 @@
         </Menu>
 
         <!-- Список записей -->
-        <TabControl ItemsSource="{Binding CompanyDepartments}" SelectedIndex="{Binding Selected}" Height="370" Margin="10 0 10 0">
+        <TabControl ItemsSource="{Binding CompanyDepartments}" SelectedIndex="{Binding SelectedDepartment}" Height="370" Margin="10 0 10 0">
             <TabControl.ContentTemplate>
                 <DataTemplate>
                     <ListView ItemsSource="{Binding Workers}" SelectedIndex="{Binding SelectedWorker}">

@@ -16,10 +16,19 @@ namespace Homework_08.Services
         /// </summary>
         /// <param name="list"> Сортируемый лист </param>
         /// <param name="key"> Критерий сортировки </param>
-        static public void SortWorker(ObservableCollection<Worker> list, Func<Worker, T> key)
+        static public void SortWorker(ObservableCollection<Worker> list, Func<Worker, T> key1, Func<Worker, T> key2 = null)
         {
             ObservableCollection<Worker> TempList = new ObservableCollection<Worker>();
-            IEnumerable<Worker> e = list.OrderBy(key);
+            IEnumerable<Worker> e;
+
+            if(key2 != null)
+            {
+                e = list.OrderBy(key1).ThenBy(key2);
+            }
+            else
+            {
+                e = list.OrderBy(key1);
+            }
 
             TempList.Clear();
 
