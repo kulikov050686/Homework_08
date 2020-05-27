@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Homework_08.BaseClasses;
+using System;
 
 namespace Homework_08.Models
 {
@@ -7,42 +8,127 @@ namespace Homework_08.Models
     /// </summary>
     ///[Serializable]
     ///
-    public class Worker
+    public class Worker : BaseClassINPC
     {
+        int id;
+        string firstName;
+        string lastName;
+        int age;
+        string nameDepartment;
+        string employeePosition;
+        int salary;
+
         /// <summary>
         /// Идентификатор работника
         /// </summary>
-        public int Id { get; set; }
+        public int Id
+        { 
+            get 
+            { 
+                return id; 
+            }
+            set 
+            {
+                id = value;
+                OnPropertyChanged("Id");
+            } 
+        }
 
         /// <summary>
         /// Имя работника
         /// </summary>
-        public string FirstName { get; set; }
+        public string FirstName
+        {
+            get 
+            {
+                return firstName; 
+            }
+            set 
+            {
+                firstName = value;
+                OnPropertyChanged("FirstName");
+            } 
+        }
 
         /// <summary>
         /// Фамилия работника
         /// </summary>
-        public string LastName { get; set; }
+        public string LastName
+        {
+            get 
+            { 
+                return lastName; 
+            } 
+            set
+            {
+                lastName = value;
+                OnPropertyChanged("LastName");
+            }
+        }
 
         /// <summary>
         /// Возраст работника
         /// </summary>
-        public int Age { get; set; }
+        public int Age
+        {
+            get 
+            {
+                return age; 
+            }
+            set 
+            {
+                age = value;
+                OnPropertyChanged("Age");
+            } 
+        }
 
         /// <summary>
         /// Название департамента работника
         /// </summary>
-        public string NameDepartment { get; set; }
+        public string NameDepartment
+        {
+            get 
+            {
+                return nameDepartment; 
+            }
+            set 
+            {
+                nameDepartment = value;
+                OnPropertyChanged("NameDepartment");
+            } 
+        }
 
         /// <summary>
         /// Должность работника
         /// </summary>
-        public string EmployeePosition { get; set; }
+        public string EmployeePosition
+        {
+            get 
+            {
+                return employeePosition; 
+            }
+            set 
+            {
+                employeePosition = value;
+                OnPropertyChanged("EmployeePosition");
+            } 
+        }
 
         /// <summary>
         /// Зарплата работника
         /// </summary>
-        public int Salary { get; set; }
+        public int Salary
+        {
+            get 
+            {
+                return salary; 
+            }
+            set 
+            {
+                salary = value;
+                OnPropertyChanged("Salary");
+            } 
+        }
 
         /// <summary>
         /// Конструктор по умолчанию

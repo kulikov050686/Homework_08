@@ -22,10 +22,7 @@ namespace Homework_08.BaseClasses
         /// <param name="property"> Изменившееся свойство </param>
         public void OnPropertyChanged([CallerMemberName]string property = "")
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
         /// <summary>
